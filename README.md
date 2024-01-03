@@ -4,11 +4,13 @@ This repo contains a sample of data produced by the Run4more App and a sample of
 The motivation for this repo was to provide to the students of the https://bis-analytics.econ.uoa.gr/ Postgraduate Program real life data and problem sets.
 Following all the basic steps to learning python, this repo is used to provide real-use cases for everything.  
 The goal is to show a practical use of everything that is being taught and build the foundations for understanding multi-index dataframes while learning indexing and slicing on lists and strings.  
+It follows the material of the University e-class (private to enrolled students) and relates it to a real use-case of a StartUp Company.
 
 After receiving useful students' feedback from past years it is being refactored to become public and to meet several purposes. It is meant to achieve the following:   
-1. Be used as educational material for students interested in learning python and train on real data and problem sets.
-2. Demonstrate to Run4more App users how their App data help our mission to increase physical activity.
+1. Be used as educational material for students interested in learning python and train on real data and problem sets.  
+2. Demonstrate to Run4more App users how their App data help our mission to increase physical activity.  
 3. Demonstrate to Run4more App partners the data that we collect and analyze.  
+4. Create a working example for the "Run4more StartUps Academy" project, a new project in progress in which StartUps may offer a sample of their data to help Univerisities provide more efficient education and research.  
 
 The App data are produced in real time by "events" and "actions" while using the App.
 They are stored in a mongoDB database.   
@@ -25,5 +27,8 @@ At the end of studying the material, students should be able to:
 * create numerical, categorical, geospatial charts,
 * deploy online and interactive visualization dashboards that can be used in production.
 
-## Section 1: Basic python for Data analysis
-## Section 5
+## Section 1: Basic python for Everything
+## Section 2: Python for working with Data
+## Section 3: Python for visualisations
+## Section 4: Python for Maching Learning
+## Section 5: Python for Deep Learning and AI
