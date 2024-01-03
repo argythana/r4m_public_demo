@@ -2,6 +2,8 @@
 
 This repo contains a sample of data produced by the Run4more App and a sample of the analytic tools that are being used.  
 The motivation for this repo was to provide to the students of the https://bis-analytics.econ.uoa.gr/ Postgraduate Program real life data and problem sets.
+Following all the basic steps to learning python, this repo is used to provide real-use cases for everything.  
+The goal is to show a practical use of everything that is being taught and build the foundations for understanding multi-index dataframes while learning indexing and slicing on lists and strings.  
 
 After receiving useful students' feedback from past years it is being refactored to become public and to meet several purposes. It is meant to achieve the following:   
 1. Be used as educational material for students interested in learning python and train on real data and problem sets.
@@ -22,3 +24,6 @@ At the end of studying the material, students should be able to:
 * implement ML algorithms,
 * create numerical, categorical, geospatial charts,
 * deploy online and interactive visualization dashboards that can be used in production.
+
+## Section 1: Basic python for Data analysis
+## Section 5
