@@ -33,4 +33,5 @@ At the end of studying the material, students should be able to:
 ## Section 3: Python for Visualisations
 ## Section 4: Python for Maching Learning
 ## Section 5: Python for Deep Learning and AI
-## Section 6: Python for Databases and Big Data Analysis
+## Section 6: Python for Databases
+## Section 7: Python for Big Data analysis
