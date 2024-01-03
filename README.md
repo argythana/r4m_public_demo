@@ -3,8 +3,7 @@
 This repo contains a sample of data produced by the Run4more App and a sample of the analytic tools that are being used.  
 The motivation for this repo was to provide to the students of the https://bis-analytics.econ.uoa.gr/ Postgraduate Program real life data and problem sets.
 
-After receiving useful students' feedback from past years, it has become public and is being refactored to meet several purposes, with different sections.  
-It is meant to achieve the following:  
+After receiving useful students' feedback from past years it is being refactored to become public and to meet several purposes. It is meant to achieve the following:   
 1. Be used as educational material for students interested in learning python and train on real data and problem sets.
 2. Demonstrate to Run4more App users how their App data help our mission to increase physical activity.
 3. Demonstrate to Run4more App partners the data that we collect and analyze.  
@@ -16,7 +15,7 @@ This data will be processed and presented using various tools and visualization 
 
 The data being used are of various categories, text, numeric, categorical, quantitative, date, time, geolocation, binary, multi-class.
 Tasks begin with simple python tasks such as working with strings and basic data containers, such as to fix email lists.
-Tasks include working on the data with advaced ML algorithms and visualisation tools.
+Tasks gradually advance to include working on the data with advaced ML algorithms and visualisation tools.
 
 At the end of studying the material, students should be able to:  
 * manage and preproccess data of various types,
