@@ -20,10 +20,10 @@ This data will be processed and presented using various tools and visualization 
 
 The data being used are of various categories, text, numeric, categorical, quantitative, date, time, geolocation, binary, multi-class.
 Tasks begin with simple python tasks such as working with strings and basic data containers, such as to fix email lists.
-Tasks gradually advance to include working on the data with advaced ML algorithms and visualisation tools.
+Tasks gradually advance to include working on the data with advanced ML algorithms and visualisation tools.
 
 At the end of studying the material, students should be able to:  
-* manage and preproccess data of various types,
+* manage and preprocess data of various types,
 * implement ML algorithms,
 * create numerical, categorical, geospatial charts,
 * deploy online and interactive visualization dashboards that can be used in production.
@@ -31,7 +31,7 @@ At the end of studying the material, students should be able to:
 ## Section 1: Basic python for Everything
 ## Section 2: Working with Data
 ## Section 3: Visualisations
-## Section 4: Maching Learning
+## Section 4: Machine Learning
 ## Section 5: Deep Learning and AI
 ## Section 6: Databases
 ## Section 7: Big Data storage and analysis
