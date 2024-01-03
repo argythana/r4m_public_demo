@@ -29,9 +29,9 @@ At the end of studying the material, students should be able to:
 * deploy online and interactive visualization dashboards that can be used in production.
 
 ## Section 1: Basic python for Everything
-## Section 2: Python for working with Data
-## Section 3: Python for Visualisations
-## Section 4: Python for Maching Learning
-## Section 5: Python for Deep Learning and AI
-## Section 6: Python for Databases
-## Section 7: Python for Big Data analysis
+## Section 2: Working with Data
+## Section 3: Visualisations
+## Section 4: Maching Learning
+## Section 5: Deep Learning and AI
+## Section 6: Databases
+## Section 7: Big Data storage and analysis
