@@ -11,7 +11,7 @@ After receiving useful students' feedback from past years it is being refactored
 1. Be used as educational material for students interested in learning python and train on real data and problem sets.  
 2. Demonstrate to Run4more App users how their App data help our mission to increase physical activity.  
 3. Demonstrate to Run4more App partners the data that we collect and analyze.  
-4. Create a working example for the "Run4more StartUps Academy" project, a new project in progress in which StartUps may offer a sample of their data to help Univerisities provide more efficient education and research.  
+4. Create a working example for the "Run4more StartUps Academy" project, a project in progress in which StartUps offer a sample of their data to help Universities provide more efficient education and research.  
 
 The App data are produced in real time by "events" and "actions" while using the App.
 They are stored in a mongoDB database.   
@@ -28,10 +28,34 @@ At the end of studying the material, students should be able to:
 * create numerical, categorical, geospatial charts,
 * deploy online and interactive visualization dashboards that can be used in production.
 
-## Section 1: Basic python for Everything
-## Section 2: Working with Data
-## Section 3: Visualisations
-## Section 4: Machine Learning
-## Section 5: Deep Learning and AI
-## Section 6: Databases
-## Section 7: Big Data storage and analysis
+**This repo is by design a blend of what should in principle be two distinct repositories, which have been merged together to provide a more comprehensive learning experience.**
+It consists of two general purpose parts:  
+
+Part A) The introductory teaching material which contains all sections that follow the material of the course.  
+The introductory material makes use of the Run4more data to provide real life examples of the tasks being taught.  
+
+Part B) The Run4more gallery which contains advanced coding topics, beyond what is taught in course.
+
+## Part A) Introductory teaching material.
+Each section is accompanied by jupyter notebooks and a .py files that contain the code and the explanation of the tasks.  
+
+### Section 1: Basic python for Everything
+See lecture files 1-5 of the e-class.  
+The goal of this section is to learn the basics of python and how this can be useful when dealing with Data.
+
+### Section 2: Working with Data and Dataframes
+See lecture 6 files of the e-class.
+
+### Section 3: Static and Interactive Visualisations
+See lecture 7 files of the e-class.  
+
+### Section 4: Machine Learning
+See lectures 8-12 files of the e-class.
+
+### Section 5: Deep Learning and AI
+
+### Section 6: Databases
+
+### Section 7: Big Data storage and analysis
+
+## Part B) Run4more gallery.
