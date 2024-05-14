@@ -3,3 +3,6 @@
 .idea/
 .venv/
 
+# access configs
+src/config/credentials.json
+
