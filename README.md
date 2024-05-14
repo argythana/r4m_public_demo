@@ -22,11 +22,11 @@ They are stored in a mongoDB database.
 For educational purposes, a sample of the data is stored in various formats (e.g. csv, bson).
 This data will be processed and presented using various python libraries and command line tools.
 
-The data being used are of various categories, text, numeric, categorical, quantitative, date, time, geolocation, binary, multi-class.
+The data will cover various types (text, numeric, categorical, quantitative, date, time, geolocation, binary, multi-class).
 Tasks begin with simple python tasks such as working with strings and basic data containers, such as to fix email lists.
 Tasks gradually advance to include working on the data with advanced ML algorithms and visualisation tools.
 
-The repo contains step-by-step educational material to:   
+Step-by-step educational material will be added to show examples of how to:   
 * manage and preprocess data of various types, from different file formats, and databases. 
 * implement ML algorithms,
 * create numerical, categorical, geospatial charts,
