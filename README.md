@@ -3,13 +3,14 @@
 
 ## Purpose
 This repo contains a sample of data produced by the Run4more App and a sample of the tools that are being used.  
-The initial motivation for this repo was to provide to the students of the [UoA Postgraduate Program](https://bis-analytics.econ.uoa.gr/) real life data and problems.
+The initial motivation for this repo was to provide to the students of the [UoA Postgraduate Program](https://bis-analytics.econ.uoa.gr/) real life data and problems.  
 Absolutely voluntary work, not part of the University of Athens courses material.   
 
 For beginners, the material of the Postgradute Program course is an absolutely necessary pre-requisite.  
-Please visit the [public repo of the University of Athens BIS postgrad program course.](https://github.com/argythana/uoa_py_course).
-Similarly, basic knowledge of git, mongoDB, Postgres, and python dev tools like pipx, poetry, ruff, pyright, pytest, black is necessary.
-Please visit the [public repo of the University of Athens BIS postgrad program crash-course.](https://github.com/argythana/dev_boilerplate_course)
+Please visit the [public repo of the University of Athens BIS postgrad program course.](https://github.com/argythana/uoa_py_course)  
+Similarly, basic knowledge of git, mongoDB, Postgres, and python dev tools such as pipx, poetry, ruff, pyright, pytest, black is necessary.
+Please visit the [public repo of the University of Athens BIS postgrad program crash-course on dev tools.](https://github.com/argythana/dev_boilerplate_course)    
+
 
 Thanks to useful students' feedback from previous years, this repo is being refactored as a new public version to meet several purposes.  
 It is meant to achieve the following:   
