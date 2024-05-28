@@ -49,7 +49,7 @@ jobs:
       - run: python -m pip cache info
       - run: black --check src
       - run: isort --check-only src
-      - run: ruff --check src
+      - run: ruff check src
       - run: mypy src
       - run: pytest --cov=src tests
       - run: pyright src
