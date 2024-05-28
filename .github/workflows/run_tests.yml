@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - master
+
     paths:
       - "**.py"
       - ".github/workflows/*test*.yml"
@@ -42,16 +42,14 @@ jobs:
         with:
           path: ${{ env.pythonLocation }}
           key: test-${{ runner.os }}-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml', 'requirements/*') }}
-      - run: pip install -r requirements/requirements-dev.txt
-      - run: pip install ./
+      - run: pip install -r requirements/requirements.txt
       - run: python --version
       - run: python -m pip --version
       - run: pytest --version
       - run: python -m pip cache info
+      - run: black --check src
+      - run: isort --check-only src
+      - run: ruff --check src
       - run: mypy src
-      - run: make exec_notebooks
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python == '3.10' }}
-      - uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
+      - run: pytest --cov=src tests
+      - run: pyright src
