@@ -5,13 +5,15 @@ Use the template_credentials.json file to create your own credentials.json file.
 Use from local PC for dev and testing and from localhost on VMs for production.
 """
 
+from __future__ import annotations
+
 from datetime import datetime
 from typing import List
 
 import pymongo
 from pymongo.collection import Collection
 from pymongo.database import Database
-from sshtunnel import SSHTunnelForwarder
+from sshtunnel import SSHTunnelForwarder  # type: ignore
 
 # First Datetime log
 INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
@@ -63,7 +65,7 @@ def connect_to_remote_db(
     db_name: str = credentials[database_schema]["mongodbDatabase"]
 
     # Connect to the MongoDB database
-    db_client = pymongo.MongoClient(
+    db_client: pymongo.MongoClient = pymongo.MongoClient(
         host="localhost",
         port=ssh_connection_instance.local_bind_port,
         username=credentials[database_schema]["mongodbUser"],
@@ -95,7 +97,7 @@ def connect_to_localhost_db(
     db_name: str = credentials[database_schema]["mongodbDatabase"]
 
     # Connect to the MongoDB database
-    db_client = pymongo.MongoClient(
+    db_client: pymongo.MongoClient = pymongo.MongoClient(
         host="localhost",
         port=27017,
         username=credentials[database_schema]["mongodbUser"] if machine == "vm" else "",
@@ -144,7 +146,7 @@ def copy_remote_app_db_on_local_pc(
     db_target = connect_to_localhost_db(target_db + schema, machine, credentials)
 
     # Copy listed collections from the VM database to a local database.
-    # TODO: Refactor to update if collection exists.
+    # TODO: Refactor to update if collection exists. Code breaks if collection exists
     for db_collection in copy_collections:
         db_collection_documents = list(from_remote_db[db_collection].find())
         # Create the collections on the local PC database.
