@@ -1,0 +1,57 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "**.py"
+      - ".github/workflows/*test*.yml"
+      - "pyproject.toml"
+      - "poetry.lock"
+      - "requirements/requirements*.txt"
+  pull_request:
+    paths:
+      - "**.py"
+      - ".github/workflows/*test*.yml"
+      - "pyproject.toml"
+      - "poetry.lock"
+      - "requirements/requirements*.txt"
+
+jobs:
+  test:
+    name: test Python ${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.10", "3.11"]
+        include:
+          - os: "macos-latest"
+            python: "3.10"
+          - os: "macos-latest"
+            python: "3.11"
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-python@main
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/cache@main
+        id: cache
+        with:
+          path: ${{ env.pythonLocation }}
+          key: test-${{ runner.os }}-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml', 'requirements/*') }}
+      - run: pip install -r requirements/requirements-dev.txt
+      - run: pip install ./
+      - run: python --version
+      - run: python -m pip --version
+      - run: pytest --version
+      - run: python -m pip cache info
+      - run: mypy src
+      - run: make exec_notebooks
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python == '3.10' }}
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
