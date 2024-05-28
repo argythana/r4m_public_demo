@@ -1,7 +1,5 @@
 """
 Functions to test the connections to the remote servers and to mongo Databases.
-Make sure to have the credentials.json file in the config folder.
-Use the template_credentials.json file to create your own credentials.json file.
 """
 
 import json
@@ -12,7 +10,7 @@ import pymongo
 import pytest
 from pymongo.collection import Collection
 from pymongo.database import Database
-from sshtunnel import SSHTunnelForwarder
+from sshtunnel import SSHTunnelForwarder # type: ignore
 
 INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
 
@@ -114,7 +112,7 @@ def test_connect_to_remote_db(
     db_name: str = credentials[database_schema]["mongodbDatabase"]
 
     # Connect to the MongoDB database
-    db_client = pymongo.MongoClient(
+    db_client: pymongo.MongoClient = pymongo.MongoClient(
         host="localhost",
         port=ssh_connection_instance.local_bind_port,
         username=credentials[database_schema]["mongodbUser"],
