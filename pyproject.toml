@@ -11,6 +11,10 @@ pandas = "^2.2.2"
 pymongo = "^4.7.2"
 sshtunnel = "^0.4.0"
 pytest = "^8.2.0"
+ipython = "^8.24.0"
+black = "^24.4.2"
+ruff = "^0.4.5"
+pyright = "^1.1.364"
 
 
 [build-system]
