@@ -1,31 +1,28 @@
 """
-This script initializes the analytics database by cloning the collections from the AppDB.
+Initialise a new database and add an initial datetime log.
 """
 
 import json
-from connection_utils import init_analytics_db
 
-import os
-
-# Get the absolute path of the directory where the credentials.json file is located
-config_dir = os.path.abspath("../config/")
+from connection_utils import init_new_db
 
 if __name__ == "__main__":
     # Run from utils/
     with open("../config/credentials.json") as credentials_file:
         credentials = json.load(credentials_file)
-        host_server = "app_server"
+
         schema = credentials["schema"]
         machine = credentials["machine"]
-        # AppDB collections to clone locally.
-        db_collections_list = ["users", "activities", "participations"]
 
-    # Todo: Document that credentials should be in config.json file.
-    init_analytics_db(
-        host_server,
-        schema,
-        credentials,
-        machine,
-        db_collections=db_collections_list,
-        target_db_name="app",  # Todo: Remove clone db from init analytics.
-    )
+    # DB credentials should be in config.json file.
+    try:
+        init_new_db(
+            schema,
+            credentials,
+            machine,
+            new_db_name="tester",
+        )
+    except KeyError as e:
+        print(
+            f"DB credentials should be in config.json. This DB name does not have valid credentials.\nKeyError: {e}"
+        )
