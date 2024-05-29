@@ -52,4 +52,8 @@ jobs:
       - run: ruff check src
       - run: mypy src
       - run: pytest --cov tests
+      - name: Upload coverage reports to Codecov
+        run: |
+            chmod +x codecov
+            ./codecov --verbose upload-process --fail-on-error -t ${{ secrets.CODECOV_TOKEN }} -n 'service'-${{ github.run_id }} -F service -f coverage-service.xml
       - run: pyright src
