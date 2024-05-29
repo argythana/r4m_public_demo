@@ -67,32 +67,6 @@ def db_collection():
     return MagicMock(spec=Collection)
 
 
-def test_ssh_to_remote_server(
-    host_server: str, credentials: dict
-) -> SSHTunnelForwarder:
-    """
-    SSH into remote server.
-    Args:
-        host_server: The server to connect to. IP, port, username should be in credentials.json.
-            Available options are: "app_server", "analytics_server".
-        credentials: Data in dict format from to the credentials.json file.
-    Return: server_instance, an SSHTunnelForwarder.
-    """
-
-    # SSH Tunnel into the remote VM
-    ssh_connection_instance = SSHTunnelForwarder(
-        ssh_address_or_host=(
-            credentials[host_server]["ip"],
-            credentials[host_server]["port"],
-        ),
-        ssh_username=credentials[host_server]["username"],
-        ssh_pkey=credentials["ssh_pkey_location"],
-        remote_bind_address=("localhost", 27017),
-    )
-    assert isinstance(ssh_connection_instance, SSHTunnelForwarder)
-    return ssh_connection_instance
-
-
 def test_create_datetime_init_check(
     db: Database, init_check_datetime: datetime = INIT_CHECK_DATETIME
 ) -> None:
