@@ -1,3 +1,5 @@
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
+
 # Public demo of Run4more analytics data.
 
 
@@ -44,5 +46,3 @@ Step-by-step educational material will be added to show examples of how to:
 
 ## Teaching material.
 Each section is accompanied by jupyter notebooks and/or .py files that contain the code and the explanation of the tasks.
-
-[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)

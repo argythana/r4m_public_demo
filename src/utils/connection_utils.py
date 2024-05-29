@@ -11,7 +11,6 @@ from datetime import datetime
 from typing import List
 
 import pymongo
-from pymongo.collection import Collection
 from pymongo.database import Database
 from sshtunnel import SSHTunnelForwarder  # type: ignore
 
@@ -160,24 +159,22 @@ def copy_remote_app_db_on_local_pc(
 
 
 def create_datetime_init_check(
-    db_collection: Collection, init_check_datetime: datetime = INIT_CHECK_DATETIME
+    db: Database, init_check_datetime: datetime = INIT_CHECK_DATETIME
 ) -> None:
     """
     Create a DB collection to store datetime checks, if it doesn't exist.
     Set init datetime to check before updating future collections.
     Args:
         init_check_datetime (datetime): The beginning of time for this Database.
-        db_collection: The database instance to use.
+        db: The database instance to use.
         datetime object: The datetime to start checking for activities.
     Returns:
         None.
     """
 
     # A collection containing only datetime logs to check before updating future collections.
-    if db_collection["misc"].find_one({"key": "checkDatetime"}) is None:
-        db_collection["misc"].insert_one(
-            {"key": "checkDatetime", "value": init_check_datetime}
-        )
+    if db["misc"].find_one({"key": "checkDatetime"}) is None:
+        db["misc"].insert_one({"key": "checkDatetime", "value": init_check_datetime})
     return None
 
 
@@ -206,6 +203,7 @@ def init_new_db(
     )
 
     # Init first datetime log.
-    create_datetime_init_check(new_db["misc"], INIT_CHECK_DATETIME)
+    create_datetime_init_check(new_db, INIT_CHECK_DATETIME)
+    # create_datetime_init_check(new_db["misc"], INIT_CHECK_DATETIME)
 
     new_db.client.close()
