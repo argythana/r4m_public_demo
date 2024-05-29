@@ -47,14 +47,17 @@ jobs:
       - run: python -m pip --version
       - run: pytest --version
       - run: python -m pip cache info
+      - run: pre-commit run end-of-file-fixer --all-files
       - run: black --check src
       - run: isort --check-only src
       - run: ruff check src
       - run: mypy src
       - run: pytest tests
-      - name: Upload coverage reports to Codecov
-        run: |
-          curl -Os https://cli.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov --verbose upload-process --fail-on-error -t ${{ secrets.CODECOV_TOKEN }} -n 'service'-${{ github.run_id }} -F service -f coverage-service.xml
       - run: pyright src
+      - name: Send coverage report to codecov
+        uses: codecov/codecov-action@v4
+        with:
+          env_vars: OS=${{ matrix.os }},PYTHON=${{ matrix.python }}
+          file: ./coverage.xml
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
