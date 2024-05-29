@@ -27,7 +27,7 @@ repos:
         exclude: ".+\\.ipynb"
       - id: "name-tests-test"
       - id: "trailing-whitespace"
-        exclude: ".*\.md"
+        exclude: ".*\\.md"
 
   - repo: "https://github.com/psf/black"
     rev: "24.4.2"
