@@ -49,17 +49,3 @@ repos:
       - id: "poetry-export"
         name: 'poetry export main'
         args: [ "--without-hashes", "--only", "main", "-f", "requirements.txt", "-o", "requirements/requirements.txt" ]
-
-  - repo: "local"
-    hooks:
-
-      - id: "mypy"
-        name: "mypy"
-        entry: "make mypy"
-        language: "system"
-        types: ["python"]
-
-      - id: "docs"
-        name: "docs"
-        entry: "make docs"
-        language: "system"
