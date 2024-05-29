@@ -25,13 +25,21 @@ def database_schema():
 
 
 @pytest.fixture
-def credentials():
+def mock_ssh_pkey():
+    return MagicMock()
+
+
+@pytest.fixture
+def credentials(mock_ssh_pkey):
     try:  # Run inside src folder.
         with open("src/config/template_credentials.json") as credentials_file:
             credentials = json.load(credentials_file)
     except FileNotFoundError:  # Run from folder next to src, e.g. tests.
         with open("../src/config/template_credentials.json") as credentials_file:
             credentials = json.load(credentials_file)
+
+    # Add the mock SSH key to the credentials
+    credentials["ssh_pkey_location"] = mock_ssh_pkey
     return credentials
 
 
