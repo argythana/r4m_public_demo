@@ -5,7 +5,7 @@ Run on local PC to get a copy of selected collections from a remote DB.
 
 import json
 
-from .connection_utils import copy_remote_app_db_on_local_pc
+from connection_utils import copy_remote_app_db_on_local_pc  # type: ignore
 
 if __name__ == "__main__":
     # Run from utils/

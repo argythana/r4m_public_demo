@@ -4,7 +4,7 @@ Initialise a new database and add an initial datetime log.
 
 import json
 
-from .connection_utils import init_new_db
+from connection_utils import init_new_db  # type: ignore
 
 if __name__ == "__main__":
     # Run from utils/
@@ -20,7 +20,7 @@ if __name__ == "__main__":
             schema,
             credentials,
             machine,
-            new_db_name="tester",
+            new_db_name="test",
         )
     except KeyError as e:
         print(

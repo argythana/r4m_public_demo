@@ -5,12 +5,13 @@ Functions to test the connections to the remote servers and to mongo Databases.
 import json
 from datetime import datetime
 from unittest.mock import MagicMock
+from typing import cast
 
 import pymongo
 import pytest
 from pymongo.collection import Collection
 from pymongo.database import Database
-from sshtunnel import SSHTunnelForwarder # type: ignore
+from sshtunnel import SSHTunnelForwarder  # type: ignore
 
 INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
 
@@ -60,8 +61,10 @@ def test_ssh_to_remote_server(
             credentials[host_server]["port"],
         ),
         ssh_username=credentials[host_server]["username"],
+        ssh_pkey=credentials["ssh_pkey_location"],
         remote_bind_address=("localhost", 27017),
     )
+    assert isinstance(ssh_connection_instance, SSHTunnelForwarder)
     return ssh_connection_instance
 
 
@@ -87,7 +90,6 @@ def test_create_datetime_init_check(
     return None
 
 
-# @pytest.fixture
 def test_connect_to_remote_db(
     host_server: str, database_schema: str, credentials: dict
 ) -> None:
@@ -104,20 +106,27 @@ def test_connect_to_remote_db(
     Return: A database object with access to all remote DB collections.
     """
 
-    ssh_connection_instance = test_ssh_to_remote_server(host_server, credentials)
-    # start the SSH tunnel. Close it after use.
-    ssh_connection_instance.start()
+    with SSHTunnelForwarder(
+        ssh_address_or_host=(
+            credentials[host_server]["ip"],
+            credentials[host_server]["port"],
+        ),
+        ssh_username=credentials[host_server]["username"],
+        ssh_pkey=credentials["ssh_pkey_location"],
+        remote_bind_address=("localhost", 27017),
+    ) as ssh_connection_instance:
+        ssh_connection_instance = cast(SSHTunnelForwarder, ssh_connection_instance)
 
-    # which DB to connect to. Is the name from a schema.
-    db_name: str = credentials[database_schema]["mongodbDatabase"]
+        # which DB to connect to. Is the name from a schema.
+        db_name: str = credentials[database_schema]["mongodbDatabase"]
 
-    # Connect to the MongoDB database
-    db_client: pymongo.MongoClient = pymongo.MongoClient(
-        host="localhost",
-        port=ssh_connection_instance.local_bind_port,
-        username=credentials[database_schema]["mongodbUser"],
-        password=credentials[database_schema]["mongodbPassword"],
-        authSource=db_name,
-    )
-    remote_db: Database = db_client[db_name]
-    assert isinstance(remote_db, Database)
+        # Connect to the MongoDB database
+        db_client: pymongo.MongoClient = pymongo.MongoClient(
+            host="localhost",
+            port=ssh_connection_instance.local_bind_port,
+            username=credentials[database_schema]["mongodbUser"],
+            password=credentials[database_schema]["mongodbPassword"],
+            authSource=db_name,
+        )
+        remote_db: Database = db_client[db_name]
+        assert isinstance(remote_db, Database)

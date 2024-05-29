@@ -36,6 +36,7 @@ def ssh_to_remote_server(host_server: str, credentials: dict) -> SSHTunnelForwar
             credentials[host_server]["port"],
         ),
         ssh_username=credentials[host_server]["username"],
+        ssh_pkey=credentials["ssh_pkey_location"],
         remote_bind_address=("localhost", 27017),
     )
     return ssh_connection_instance
