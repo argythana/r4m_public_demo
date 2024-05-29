@@ -51,7 +51,7 @@ jobs:
       - run: isort --check-only src
       - run: ruff check src
       - run: mypy src
-      - run: pytest --cov tests
+      - run: pytest tests
       - name: Upload coverage reports to Codecov
         run: |
             chmod +x codecov
