@@ -1,5 +1,6 @@
 [![pre-commit.ci](https://results.pre-commit.ci/badge/github/argythana/r4m_public_demo/main.svg)](https://results.pre-commit.ci/latest/github/argythana/r4m_public_demo/main)
 [![tests](https://github.com/argythana/r4m_public_demo/actions/workflows/run_tests.yml/badge.svg)](https://github.com/argythana/r4m_public_demo/actions/workflows/run_tests.yml)
+[![codecov](https://codecov.io/gh/argythana/r4m_public_demo/branch/main/graphs/badge.svg?branch=main)](https://codecov.io/github/argythana/r4m_public_demo?branch=main)
 [![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 
 # Public demo of Run4more analytics data.
