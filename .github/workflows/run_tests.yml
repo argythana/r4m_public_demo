@@ -51,5 +51,5 @@ jobs:
       - run: isort --check-only src
       - run: ruff check src
       - run: mypy src
-      - run: pytest tests --cov=src --cov-report=xml
+      - run: pytest tests --cov
       - run: pyright src
