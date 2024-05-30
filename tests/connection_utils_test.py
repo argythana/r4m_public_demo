@@ -85,22 +85,22 @@ def test_init_new_db(db):
         },
     }
 
-    # Mock the connect_to_localhost_db function to return the mock db
-    with patch("connection_utils.connect_to_localhost_db", return_value=db):
-        # Test connection to an existing local database
-        db = connection_utils.connect_to_localhost_db(
-            database_name, machine, credentials
-        )
-
+    # Mock the MongoClient class to return the mock db
+    with patch("pymongo.MongoClient", return_value=db):
         # Mock the connect_to_localhost_db function to return the mock db
         with patch("connection_utils.connect_to_localhost_db", return_value=db):
+            # Test connection to an existing local database
+            db = connection_utils.connect_to_localhost_db(
+                database_name, machine, credentials
+            )
+
             # Test init new database
             connection_utils.init_new_db(
                 schema, credentials, machine, new_db_name=new_db_name
             )
 
-        # Verify
-        assert db is not None
+    # Verify
+    assert db is not None
 
 
 def test_failed_db_connection():
