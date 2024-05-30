@@ -47,10 +47,11 @@ jobs:
       - run: isort --check-only src
       - run: ruff check src
       - run: mypy src
-      - run: pytest tests
       - run: pyright src
+      - name: Run tests and collect coverage
+        run: pytest --cov --cov-report=xml
       - name: Send coverage report to codecov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v4.2.0
         with:
           env_vars: OS=${{ matrix.os }},PYTHON=${{ matrix.python }}
           file: ./coverage.xml

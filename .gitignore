@@ -2,6 +2,8 @@
 .envrc
 .idea/
 .venv/
+# local pytest cov report
+.coverage
 
 # access configs
 src/config/credentials.json
