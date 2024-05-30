@@ -2,14 +2,13 @@
 Functions to test the connections to the remote servers and to mongo Databases.
 """
 
+import sys
 from datetime import datetime
 from unittest.mock import MagicMock
 
 import pytest
 from pymongo.collection import Collection
 from pymongo.database import Database
-
-import sys
 
 sys.path.insert(0, "./../src")
 sys.path.insert(0, "./src")

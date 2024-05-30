@@ -6,6 +6,7 @@ Use from local PC for dev and testing and from localhost on VMs for production.
 """
 
 from __future__ import annotations
+
 from datetime import datetime
 from typing import List
 
