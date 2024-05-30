@@ -92,10 +92,12 @@ def test_init_new_db(db):
             database_name, machine, credentials
         )
 
-        # Test init new database
-        connection_utils.init_new_db(
-            schema, credentials, machine, new_db_name=new_db_name
-        )
+        # Mock the connect_to_localhost_db function to return the mock db
+        with patch("connection_utils.connect_to_localhost_db", return_value=db):
+            # Test init new database
+            connection_utils.init_new_db(
+                schema, credentials, machine, new_db_name=new_db_name
+            )
 
         # Verify
         assert db is not None
