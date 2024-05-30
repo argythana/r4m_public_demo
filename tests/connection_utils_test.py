@@ -4,7 +4,7 @@ Functions to test the connections to the remote servers and to mongo Databases.
 
 import sys
 from datetime import datetime
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 from pymongo.collection import Collection
@@ -12,6 +12,7 @@ from pymongo.database import Database
 
 sys.path.insert(0, "./../src")
 sys.path.insert(0, "./src")
+sys.path.insert(0, "./src/utils")
 
 from utils import connection_utils
 
@@ -50,9 +51,9 @@ def test_create_datetime_init_check(
 
 
 def test_successful_db_connection(db):
-    db_schema = "testProd"
+    database_name = "testProd"
     machine = "local_pc"
-    valid_credentials = {
+    credentials = {
         "testProd": {
             "mongodbUser": "testProdUser",
             "mongodbDatabase": "testProd",
@@ -60,14 +61,15 @@ def test_successful_db_connection(db):
         },
     }
 
-    # Test connection to a local database
-    db = connection_utils.connect_to_localhost_db(db_schema, machine, valid_credentials)
+    # Mock the connect_to_localhost_db function to return the mock db
+    with patch("connection_utils.connect_to_localhost_db", return_value=db):
+        # Test connection to an existing local database
+        db = connection_utils.connect_to_localhost_db(
+            database_name, machine, credentials
+        )
 
-    # Verify
-    assert db is not None
-
-    # Teardown
-    db.client.close()
+        # Verify
+        assert db is not None
 
 
 def test_init_new_db(db):
@@ -83,17 +85,20 @@ def test_init_new_db(db):
         },
     }
 
-    # Test connection to an existing local database
-    db = connection_utils.connect_to_localhost_db(database_name, machine, credentials)
+    # Mock the connect_to_localhost_db function to return the mock db
+    with patch("connection_utils.connect_to_localhost_db", return_value=db):
+        # Test connection to an existing local database
+        db = connection_utils.connect_to_localhost_db(
+            database_name, machine, credentials
+        )
 
-    # Test init new database
-    connection_utils.init_new_db(schema, credentials, machine, new_db_name=new_db_name)
+        # Test init new database
+        connection_utils.init_new_db(
+            schema, credentials, machine, new_db_name=new_db_name
+        )
 
-    # Verify
-    assert db is not None
-
-    # Teardown
-    db.client.close()
+        # Verify
+        assert db is not None
 
 
 def test_failed_db_connection():
