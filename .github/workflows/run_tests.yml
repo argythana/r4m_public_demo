@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python: ["3.9", "3.10", "3.11", "3.12"]
+        python: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@main
       - uses: actions/setup-python@main
@@ -50,7 +50,7 @@ jobs:
       - run: pytest tests
       - run: pyright src
       - name: Send coverage report to codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v4.0.1
         with:
           env_vars: OS=${{ matrix.os }},PYTHON=${{ matrix.python }}
           file: ./coverage.xml
