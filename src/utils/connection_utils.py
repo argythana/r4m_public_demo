@@ -207,3 +207,7 @@ def init_new_db(
     # create_datetime_init_check(new_db["misc"], INIT_CHECK_DATETIME)
 
     new_db.client.close()
+
+
+def whatever():
+    pass
