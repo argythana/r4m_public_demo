@@ -2,59 +2,21 @@
 Functions to test the connections to the remote servers and to mongo Databases.
 """
 
-import json
 from datetime import datetime
 from unittest.mock import MagicMock
 
 import pytest
 from pymongo.collection import Collection
 from pymongo.database import Database
-from sshtunnel import SSHTunnelForwarder  # type: ignore
+
+import sys
+
+sys.path.insert(0, "./../src")
+sys.path.insert(0, "./src")
+
+from utils import connection_utils
 
 INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
-
-
-@pytest.fixture
-def host_server():
-    return "test_fake_server"
-
-
-@pytest.fixture
-def database_schema():
-    return "testProd"
-
-
-@pytest.fixture
-def mock_ssh_pkey():
-    return MagicMock()
-
-
-@pytest.fixture
-def credentials(mock_ssh_pkey):
-    try:  # Run inside src folder.
-        with open("src/config/template_credentials.json") as credentials_file:
-            credentials = json.load(credentials_file)
-    except FileNotFoundError:  # Run from folder next to src, e.g. tests.
-        with open("../src/config/template_credentials.json") as credentials_file:
-            credentials = json.load(credentials_file)
-
-    # Add the mock SSH key to the credentials
-    credentials["ssh_pkey_location"] = mock_ssh_pkey
-    return credentials
-
-
-@pytest.fixture
-def ssh_connection_instance(credentials, host_server):
-    ssh_connection_instance = SSHTunnelForwarder(
-        ssh_address_or_host=(
-            credentials[host_server]["ip"],
-            credentials[host_server]["port"],
-        ),
-        ssh_username=credentials[host_server]["username"],
-        ssh_pkey=credentials["ssh_pkey_location"],
-        remote_bind_address=("localhost", 27017),
-    )
-    return ssh_connection_instance
 
 
 @pytest.fixture
@@ -84,4 +46,65 @@ def test_create_datetime_init_check(
     # first datetime log to check activities
     if db["misc"].find_one({"key": "checkDatetime"}) is None:
         db["misc"].insert_one({"key": "checkDatetime", "value": init_check_datetime})
-    return None
+
+    assert db["misc"].find_one({"key": "checkDatetime"}) is not None
+
+
+def test_successful_db_connection(db):
+    db_schema = "testProd"
+    machine = "local_pc"
+    valid_credentials = {
+        "testProd": {
+            "mongodbUser": "testProdUser",
+            "mongodbDatabase": "testProd",
+            "mongodbPassword": "test_pwd",
+        },
+    }
+
+    # Test connection to a local database
+    db = connection_utils.connect_to_localhost_db(db_schema, machine, valid_credentials)
+
+    # Verify
+    assert db is not None
+
+    # Teardown
+    db.client.close()
+
+
+def test_init_new_db(db):
+    database_name = "testProd"
+    schema = "Prod"
+    machine = "local_pc"
+    new_db_name = "test"
+    credentials = {
+        "testProd": {
+            "mongodbUser": "testProdUser",
+            "mongodbDatabase": "testProd",
+            "mongodbPassword": "test_pwd",
+        },
+    }
+
+    # Test connection to an existing local database
+    db = connection_utils.connect_to_localhost_db(database_name, machine, credentials)
+
+    # Test init new database
+    connection_utils.init_new_db(schema, credentials, machine, new_db_name=new_db_name)
+
+    # Verify
+    assert db is not None
+
+    # Teardown
+    db.client.close()
+
+
+def test_failed_db_connection():
+    # Setup
+    db_schema = "testProd"
+    machine = "local_pc"
+    invalid_credentials = {"username": "invalid", "password": "invalid"}
+
+    # Exercise and Verify
+    with pytest.raises(Exception):  # replace with the specific exception you expect
+        connection_utils.connect_to_localhost_db(
+            db_schema, machine, invalid_credentials
+        )

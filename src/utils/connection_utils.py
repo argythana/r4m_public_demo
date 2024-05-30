@@ -6,7 +6,6 @@ Use from local PC for dev and testing and from localhost on VMs for production.
 """
 
 from __future__ import annotations
-
 from datetime import datetime
 from typing import List
 
@@ -42,16 +41,16 @@ def ssh_to_remote_server(host_server: str, credentials: dict) -> SSHTunnelForwar
 
 
 def connect_to_remote_db(
-    host_server: str, database_schema: str, credentials: dict
+    host_server: str, database_name: str, credentials: dict
 ) -> Database:
     """
     Connect to a MongoDB database on a remote sever from local PC.
     Args:
         host_server: The server to connect to. IP, port, username should be in credentials.json.
-        database_schema: The database schema (name) to connect to. Examples options are:
+        database_name: The database name)to connect to. Examples options are:
             appProd, appDev, tasksProd, tasksDev, analyticsDev, analyticsProd.
-            The database_schema contains username, pwd and name of Database.
-            The schema has version suffix: Prod or Dev. So, we need also the prefix: tasks, or app, or analytics.
+            The database_name contains username, pwd and name of Database.
+            The name has version suffix: Prod or Dev. So, we need also the prefix: tasks, or app, or analytics.
             For "non-app" DBs the scope and the DB name are identical.
         credentials: Data in dict format from the credentials.json file.
     Return: A database object with access to all remote DB collections.
@@ -62,14 +61,14 @@ def connect_to_remote_db(
     ssh_connection_instance.start()
 
     # which DB to connect to. Is the name from a schema.
-    db_name: str = credentials[database_schema]["mongodbDatabase"]
+    db_name: str = credentials[database_name]["mongodbDatabase"]
 
     # Connect to the MongoDB database
     db_client: pymongo.MongoClient = pymongo.MongoClient(
         host="localhost",
         port=ssh_connection_instance.local_bind_port,
-        username=credentials[database_schema]["mongodbUser"],
-        password=credentials[database_schema]["mongodbPassword"],
+        username=credentials[database_name]["mongodbUser"],
+        password=credentials[database_name]["mongodbPassword"],
         authSource=db_name,
     )
     remote_db: Database = db_client[db_name]
@@ -77,15 +76,15 @@ def connect_to_remote_db(
 
 
 def connect_to_localhost_db(
-    database_schema: str, machine: str, credentials: dict
+    database_name: str, machine: str, credentials: dict
 ) -> Database:
     """
     Connect to the local MongoDB database on the localhost.
     Use on local PC for development and on remote VMs for production.
     Args:
-        database_schema: The database schema (name) to connect to. Examples of DBs:
+        database_name: The database name to connect to. Examples of DBs:
             "run4moreProd", "run4moreDev", "tasksProd", "tasksDev", "analyticsDev", "analyticsProd".
-            The schema has suffix from dbVersion: Prod or Dev.
+            The name has suffix from db schema: Prod or Dev.
             We need also the prefix  "tasks", "app", or "analytics", or "test".
         machine: remote server or local PC. Arguments can be "remote" or "local_pc".
             The "machine" argument is already set accordingly on local PC and on VMs in the credentials.json file.
@@ -93,19 +92,19 @@ def connect_to_localhost_db(
     Return: A database object with access to all collections.
     """
 
-    # The DB to connect to. Is the name from a schema.
-    db_name: str = credentials[database_schema]["mongodbDatabase"]
-
     # Connect to the MongoDB database
     db_client: pymongo.MongoClient = pymongo.MongoClient(
         host="localhost",
         port=27017,
-        username=credentials[database_schema]["mongodbUser"] if machine == "vm" else "",
+        username=credentials[database_name]["mongodbUser"] if machine == "vm" else "",
         password=(
-            credentials[database_schema]["mongodbPassword"] if machine == "vm" else ""
+            credentials[database_name]["mongodbPassword"] if machine == "vm" else ""
         ),
-        authSource=db_name,
+        authSource=credentials[database_name]["mongodbDatabase"],  # name from a schema
     )
+
+    # The DB to connect to, get name from schema.
+    db_name: str = credentials[database_name]["mongodbDatabase"]
     # Create new local DB and name it according to credentials template.
     local_db: Database = db_client[db_name]
     return local_db
@@ -183,7 +182,7 @@ def init_new_db(
     credentials: dict,
     machine: str,
     *,
-    new_db_name: str = "test",
+    new_db_name: str = "new",
 ) -> None:
     """
     Initialize a new localhost database with a first datetime log
