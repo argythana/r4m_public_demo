@@ -6,6 +6,7 @@ import os
 import sys
 import typing
 from datetime import datetime
+from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -35,7 +36,7 @@ def db_collection() -> MagicMock:
 
 
 def test_create_datetime_init_check(
-    db: Database, init_check_datetime: datetime = INIT_CHECK_DATETIME
+    db: Database[Any], init_check_datetime: datetime = INIT_CHECK_DATETIME
 ) -> None:
     """
     Create  a collection to store datetime checks, if it doesn't exist.
@@ -55,7 +56,7 @@ def test_create_datetime_init_check(
     assert db["misc"].find_one({"key": "checkDatetime"}) is not None
 
 
-def test_successful_db_connection(db: Database) -> None:
+def test_successful_db_connection(db: Database[Any]) -> None:
     database_name = "testProd"
     machine = "local_pc"
     credentials = {
@@ -77,7 +78,7 @@ def test_successful_db_connection(db: Database) -> None:
         assert db is not None
 
 
-def test_init_new_db(db: Database) -> None:
+def test_init_new_db(db: Database[Any]) -> None:
     database_name = "testProd"
     schema = "Prod"
     machine = "local_pc"

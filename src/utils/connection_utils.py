@@ -8,23 +8,26 @@ Use from local PC for dev and testing and from localhost on VMs for production.
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List
+from typing import Any, Dict, List
 
 import pymongo
 from pymongo.database import Database
-from sshtunnel import SSHTunnelForwarder  # type: ignore
+from sshtunnel import SSHTunnelForwarder
 
 # First Datetime log
 INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
 
 
-def ssh_to_remote_server(host_server: str, credentials: dict) -> SSHTunnelForwarder:
+def ssh_to_remote_server(
+    host_server: str, credentials: Dict[Any, Any]
+) -> SSHTunnelForwarder:
     """
     SSH into remote server.
     Args:
-        host_server: The server to connect to. IP, port, username should be in credentials.json.
-            Available options are: "app_server", "analytics_server".
+        host_server: The server to connect to. Available options are: "app_server", "analytics_server".
+        IP, port, username should be in credentials.json.
         credentials: Data in dict format from to the credentials.json file.
+        IP, port, username should be in credentials.json.
     Return: server_instance, an SSHTunnelForwarder.
     """
 
@@ -42,8 +45,8 @@ def ssh_to_remote_server(host_server: str, credentials: dict) -> SSHTunnelForwar
 
 
 def connect_to_remote_db(
-    host_server: str, database_name: str, credentials: dict
-) -> Database:
+    host_server: str, database_name: str, credentials: Dict[Any, Any]
+) -> Database[Any]:
     """
     Connect to a MongoDB database on a remote sever from local PC.
     Args:
@@ -65,20 +68,20 @@ def connect_to_remote_db(
     db_name: str = credentials[database_name]["mongodbDatabase"]
 
     # Connect to the MongoDB database
-    db_client: pymongo.MongoClient = pymongo.MongoClient(
+    db_client: pymongo.MongoClient[Any] = pymongo.MongoClient(
         host="localhost",
         port=ssh_connection_instance.local_bind_port,
         username=credentials[database_name]["mongodbUser"],
         password=credentials[database_name]["mongodbPassword"],
         authSource=db_name,
     )
-    remote_db: Database = db_client[db_name]
+    remote_db: Database[Any] = db_client[db_name]
     return remote_db
 
 
 def connect_to_localhost_db(
-    database_name: str, machine: str, credentials: dict
-) -> Database:
+    database_name: str, machine: str, credentials: dict[Any, Any]
+) -> Database[Any]:
     """
     Connect to the local MongoDB database on the localhost.
     Use on local PC for development and on remote VMs for production.
@@ -94,7 +97,7 @@ def connect_to_localhost_db(
     """
 
     # Connect to the MongoDB database
-    db_client: pymongo.MongoClient = pymongo.MongoClient(
+    db_client: pymongo.MongoClient[Any] = pymongo.MongoClient(
         host="localhost",
         port=27017,
         username=credentials[database_name]["mongodbUser"] if machine == "vm" else "",
@@ -107,14 +110,14 @@ def connect_to_localhost_db(
     # The DB to connect to, get name from schema.
     db_name: str = credentials[database_name]["mongodbDatabase"]
     # Create new local DB and name it according to credentials template.
-    local_db: Database = db_client[db_name]
+    local_db: Database[Any] = db_client[db_name]
     return local_db
 
 
 def copy_remote_app_db_on_local_pc(
     host_server: str,
     schema: str,
-    credentials: dict,
+    credentials: Dict[Any, Any],
     machine: str,
     copy_collections: List[str],
     *,
@@ -138,7 +141,7 @@ def copy_remote_app_db_on_local_pc(
     Return: None
     """
     # DB to copy from.
-    from_remote_db: Database = connect_to_remote_db(
+    from_remote_db: Database[Any] = connect_to_remote_db(
         host_server, source_db + schema, credentials
     )
 
@@ -159,7 +162,7 @@ def copy_remote_app_db_on_local_pc(
 
 
 def create_datetime_init_check(
-    db: Database, init_check_datetime: datetime = INIT_CHECK_DATETIME
+    db: Database[Any], init_check_datetime: datetime = INIT_CHECK_DATETIME
 ) -> None:
     """
     Create a DB collection to store datetime checks, if it doesn't exist.
@@ -180,7 +183,7 @@ def create_datetime_init_check(
 
 def init_new_db(
     schema: str,
-    credentials: dict,
+    credentials: Dict[Any, Any],
     machine: str,
     *,
     new_db_name: str = "new",
@@ -198,7 +201,7 @@ def init_new_db(
     """
 
     # Connect to a MongoDB Database
-    new_db: Database = connect_to_localhost_db(
+    new_db: Database[Any] = connect_to_localhost_db(
         new_db_name + schema, machine, credentials
     )
 
