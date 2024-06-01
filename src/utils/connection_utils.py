@@ -29,7 +29,7 @@ def ssh_to_remote_server(host_server: str, credentials: dict) -> SSHTunnelForwar
     """
 
     # SSH Tunnel into the remote VM
-    ssh_connection_instance = SSHTunnelForwarder(
+    ssh_connection = SSHTunnelForwarder(
         ssh_address_or_host=(
             credentials[host_server]["ip"],
             credentials[host_server]["port"],
@@ -38,7 +38,7 @@ def ssh_to_remote_server(host_server: str, credentials: dict) -> SSHTunnelForwar
         ssh_pkey=credentials["ssh_pkey_location"],
         remote_bind_address=("localhost", 27017),
     )
-    return ssh_connection_instance
+    return ssh_connection
 
 
 def connect_to_remote_db(
@@ -207,7 +207,3 @@ def init_new_db(
     # create_datetime_init_check(new_db["misc"], INIT_CHECK_DATETIME)
 
     new_db.client.close()
-
-
-def whatever():
-    pass

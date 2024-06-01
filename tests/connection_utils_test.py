@@ -10,6 +10,10 @@ import pytest
 from pymongo.collection import Collection
 from pymongo.database import Database
 
+
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 sys.path.insert(0, "./../src")
 sys.path.insert(0, "./src")
 sys.path.insert(0, "./src/utils")
@@ -17,6 +21,11 @@ sys.path.insert(0, "./src/utils")
 from utils import connection_utils
 
 INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
+
+
+@pytest.fixture
+def app_server():
+    return "app_server"
 
 
 @pytest.fixture
