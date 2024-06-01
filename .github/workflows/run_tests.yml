@@ -46,7 +46,7 @@ jobs:
       - run: black --check src
       - run: isort --check-only src
       - run: ruff check src
-      - run: mypy src
+      - run: mypy src --strict --ignore-missing-imports --disable-error-code import-untyped
       - run: pyright src
       - name: Run tests and collect coverage
         run: pytest --cov --cov-report=xml
