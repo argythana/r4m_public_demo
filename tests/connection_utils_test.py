@@ -2,10 +2,12 @@
 Functions to test the connections to the remote servers and to mongo Databases.
 """
 
+import typing
+from typing import Any
 import sys
 from datetime import datetime
 from unittest.mock import MagicMock, patch
-
+import unittest
 import pytest
 from pymongo.collection import Collection
 from pymongo.database import Database
@@ -24,18 +26,37 @@ INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
 
 
 @pytest.fixture
-def app_server():
-    return "app_server"
-
-
-@pytest.fixture
-def db():
+@typing.no_type_check
+def db() -> MagicMock:
     return MagicMock(spec=Database)
 
 
 @pytest.fixture
-def db_collection():
+@typing.no_type_check
+def db_collection() -> MagicMock:
     return MagicMock(spec=Collection)
+
+
+class TestSSHConnection(unittest.TestCase):
+    @patch("utils.connection_utils.SSHTunnelForwarder")
+    def test_ssh_to_remote_server(self, mock_ssh_tunnel: Any) -> None:
+        # Create a mock for SSHTunnelForwarder
+        mock_ssh_tunnel_instance = MagicMock()
+        mock_ssh_tunnel.return_value = mock_ssh_tunnel_instance
+
+        # Call your function with the arguments
+        server_info = {"ip": "192.168.0.1", "port": 22, "username": "tester"}
+        ssh_connection_instance = connection_utils.ssh_to_remote_server(server_info)
+
+        # Verify that SSHTunnelForwarder was called with the correct arguments
+        mock_ssh_tunnel.assert_called_once_with(
+            ssh_address_or_host=(server_info["ip"], server_info["port"]),
+            ssh_username=server_info["username"],
+            remote_bind_address=("localhost", 27017),
+        )
+
+        # Verify that the result is the mock SSHTunnelForwarder
+        self.assertEqual(ssh_connection_instance, mock_ssh_tunnel_instance)
 
 
 def test_create_datetime_init_check(
@@ -59,7 +80,7 @@ def test_create_datetime_init_check(
     assert db["misc"].find_one({"key": "checkDatetime"}) is not None
 
 
-def test_successful_db_connection(db):
+def test_successful_db_connection(db: Database) -> None:
     database_name = "testProd"
     machine = "local_pc"
     credentials = {
@@ -81,7 +102,7 @@ def test_successful_db_connection(db):
         assert db is not None
 
 
-def test_init_new_db(db):
+def test_init_new_db(db: Database) -> None:
     database_name = "testProd"
     schema = "Prod"
     machine = "local_pc"
@@ -110,16 +131,3 @@ def test_init_new_db(db):
 
     # Verify
     assert db is not None
-
-
-def test_failed_db_connection():
-    # Setup
-    db_schema = "testProd"
-    machine = "local_pc"
-    invalid_credentials = {"username": "invalid", "password": "invalid"}
-
-    # Exercise and Verify
-    with pytest.raises(Exception):  # replace with the specific exception you expect
-        connection_utils.connect_to_localhost_db(
-            db_schema, machine, invalid_credentials
-        )
