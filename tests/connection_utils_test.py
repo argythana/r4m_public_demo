@@ -1,109 +1,99 @@
-"""
-Functions to test the connections to the remote servers and to mongo Databases.
-"""
-
-import os
 import sys
-import typing
-from datetime import datetime
-from typing import Any
+import unittest
 from unittest.mock import MagicMock, patch
 
-import pytest
-from pymongo.collection import Collection
-from pymongo.database import Database
+sys.path.append("./src/utils")
+sys.path.append("../src/utils")
+sys.path.append("../utils")
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-sys.path.insert(0, "./../src")
-sys.path.insert(0, "./src")
-sys.path.insert(0, "./src/utils")
-
-from utils import connection_utils
-
-INIT_CHECK_DATETIME = datetime(2022, 2, 10, 0, 0, 0, 0)
+from connection_utils import (
+    connect_to_localhost_db,
+    connect_to_remote_db,
+    ssh_to_remote_server,
+)
 
 
-@pytest.fixture
-@typing.no_type_check
-def db() -> MagicMock:
-    return MagicMock(spec=Database)
+class TestConnectionUtils(unittest.TestCase):
+    @patch("connection_utils.SSHTunnelForwarder")
+    def test_ssh_to_remote_server(self, mock_SSHTunnelForwarder: MagicMock) -> None:
+        # Setup
+        server_credentials = {
+            "ip": "127.0.0.1",
+            "port": 22,
+            "username": "test",
+            "ssh_pkey_location": "/path/to/key",
+        }
 
+        # Call the function
+        ssh_to_remote_server(server_credentials)
 
-@pytest.fixture
-@typing.no_type_check
-def db_collection() -> MagicMock:
-    return MagicMock(spec=Collection)
-
-
-def test_create_datetime_init_check(
-    db: Database[Any], init_check_datetime: datetime = INIT_CHECK_DATETIME
-) -> None:
-    """
-    Create  a collection to store datetime checks, if it doesn't exist.
-    Set init datetime to check activities.
-    Args:
-        init_check_datetime (datetime): The beginning of time for this Database.
-        db: The database to use.
-        datetime object: The datetime to start checking for activities.
-    Returns:
-        None.
-    """
-
-    # first datetime log to check activities
-    if db["misc"].find_one({"key": "checkDatetime"}) is None:
-        db["misc"].insert_one({"key": "checkDatetime", "value": init_check_datetime})
-
-    assert db["misc"].find_one({"key": "checkDatetime"}) is not None
-
-
-def test_successful_db_connection(db: Database[Any]) -> None:
-    database_name = "testProd"
-    machine = "local_pc"
-    credentials = {
-        "testProd": {
-            "mongodbUser": "testProdUser",
-            "mongodbDatabase": "testProd",
-            "mongodbPassword": "test_pwd",
-        },
-    }
-
-    # Mock the connect_to_localhost_db function to return the mock db
-    with patch("connection_utils.connect_to_localhost_db", return_value=db):
-        # Test connection to an existing local database
-        db = connection_utils.connect_to_localhost_db(
-            database_name, machine, credentials
+        # Assert
+        mock_SSHTunnelForwarder.assert_called_once_with(
+            ssh_address_or_host=(server_credentials["ip"], server_credentials["port"]),
+            ssh_username=server_credentials["username"],
+            ssh_pkey=server_credentials["ssh_pkey_location"],
+            remote_bind_address=("localhost", 27017),
         )
+        return None
 
-        # Verify
-        assert db is not None
+    @patch("connection_utils.pymongo.MongoClient")
+    def test_connect_to_localhost_db(self, mock_MongoClient: MagicMock) -> None:
+        # Setup
+        machine = "local_pc"
+        db_credentials = {
+            "mongodbUser": "test",
+            "mongodbPassword": "test",
+            "mongodbDatabase": "test_db",
+        }
+
+        # Call the function
+        connect_to_localhost_db(machine, db_credentials)
+
+        # Assert
+        mock_MongoClient.assert_called_once_with(
+            host="localhost",
+            port=27017,
+            authSource=db_credentials["mongodbDatabase"],
+            username="",
+            password="",
+        )
+        return None
+
+    @patch("connection_utils.pymongo.MongoClient")
+    @patch("connection_utils.ssh_to_remote_server")
+    def test_connect_to_remote_db(
+        self, mock_ssh_to_remote_server: MagicMock, mock_MongoClient: MagicMock
+    ) -> None:
+        # Setup
+        server_credentials = {
+            "ip": "127.0.0.1",
+            "port": 22,
+            "username": "test",
+            "ssh_pkey_location": "/path/to/key",
+        }
+        database_credentials = {
+            "mongodbUser": "test",
+            "mongodbPassword": "test",
+            "mongodbDatabase": "test_db",
+        }
+
+        # Mock
+        mock_ssh_to_remote_server.return_value = MagicMock(local_bind_port=27017)
+
+        # Call the function
+        connect_to_remote_db(server_credentials, database_credentials)
+
+        # Assert
+        mock_MongoClient.assert_called_once_with(
+            host="localhost",
+            port=27017,
+            username=database_credentials["mongodbUser"],
+            password=database_credentials["mongodbPassword"],
+            authSource=database_credentials["mongodbDatabase"],
+        )
+        return None
 
 
-def test_init_new_db(db: Database[Any]) -> None:
-    database_name = "testProd"
-    schema = "Prod"
-    machine = "local_pc"
-    new_db_name = "test"
-    credentials = {
-        "testProd": {
-            "mongodbUser": "testProdUser",
-            "mongodbDatabase": "testProd",
-            "mongodbPassword": "test_pwd",
-        },
-    }
-
-    # Mock the MongoClient class to return the mock db
-    with patch("pymongo.MongoClient", return_value=db):
-        # Mock the connect_to_localhost_db function to return the mock db
-        with patch("connection_utils.connect_to_localhost_db", return_value=db):
-            # Test connection to an existing local database
-            db = connection_utils.connect_to_localhost_db(
-                database_name, machine, credentials
-            )
-
-            # Test init new database
-            connection_utils.init_new_db(
-                schema, credentials, machine, new_db_name=new_db_name
-            )
-
-    # Verify
-    assert db is not None
+if __name__ == "__main__":
+    # ignore in pytest coverage
+    unittest.main()  # pragma: no cover
