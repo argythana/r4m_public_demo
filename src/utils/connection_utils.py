@@ -15,7 +15,7 @@ from sshtunnel import SSHTunnelForwarder
 
 def ssh_to_remote_server(server_credentials: Dict[Any, Any]) -> SSHTunnelForwarder:
     """
-    SSH into remote server.
+    SSH into a remote server.
     Args:
         server_credentials: Data in dict format from to a json file.
         ip, port, username should be in credentials.json.
@@ -43,9 +43,9 @@ def connect_to_localhost_db(
     Connect to the local MongoDB database on the localhost.
     Args:
         machine: The machine to connect to. Options are "local_pc", or "vm".
-        db_credentials: A dictionary of the credentials of the DB to connect to.
-        Combine the scope and credentials suffix to get the DB credentials.
-        A dictionary with the following keys: "mongodbUser", "mongodbPassword", "mongodbDatabase".
+        db_credentials: A dictionary with the following credential keys and values of a DB:
+            "mongodbUser", "mongodbPassword", "mongodbDatabase", according to the config.json file.
+            Combine the scope and credentials suffix to get the DB credentials.
     Return:
         local_db: A database object with access to all collections.
     """
@@ -75,7 +75,7 @@ def connect_to_remote_db(
         server_credentials: The server to connect to.
         database_credentials: The database credentials.
     Return:
-        remote_db: A database object with access to all collections
+        remote_db: A database object with access to all collections.
         ssh_connection: An SSHTunnelForwarder object.
     """
 
@@ -83,7 +83,7 @@ def connect_to_remote_db(
     ssh_connection: SSHTunnelForwarder = ssh_to_remote_server(server_credentials)
     ssh_connection.start()
 
-    # which DB to connect to. Is the name from a schema.
+    # DB to connect to. Is the name from the config.json file.
     db_name = database_credentials["mongodbDatabase"]
 
     # Connect to the MongoDB database
