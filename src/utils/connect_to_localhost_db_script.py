@@ -1,5 +1,8 @@
 """
 Connect to a local host database.
+Hardcoded to connect to the Prod App DB.
+Use from local PC for dev and testing.
+
 """
 
 from __future__ import annotations

@@ -26,6 +26,10 @@ streamlit = "^1.35.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[mypy]
+[tool.mypy]
 disable_error_code = "import-untyped"
-ignore_missing_imports = "True"
+ignore_missing_imports = true
+
+[tool.pyright]
+reportMissingImports = false
+venvPath = ".venv"

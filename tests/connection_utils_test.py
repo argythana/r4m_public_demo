@@ -5,6 +5,7 @@ from unittest.mock import MagicMock, patch
 sys.path.append("./src/utils")
 sys.path.append("../src/utils")
 sys.path.append("../utils")
+sys.path.append("/home/tharg/venv_projects/r4m_public/src/utils")
 
 from connection_utils import (
     connect_to_localhost_db,
