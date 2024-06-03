@@ -22,7 +22,7 @@ if __name__ == "__main__":
         machine: str = "vm"
         scope: str = "Prod_"  # ProductionDB version.
 
-        # Chose which DB to connect to.
+        # DB to connect to.
         remote_db_credentials_suffix: str = "appDb_Credentials"  # App DB.
 
         # Get remote DB credentials from local file.
