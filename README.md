@@ -7,11 +7,11 @@
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=000000)](https://pycqa.github.io/isort/)
 [![Linting: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-# Public demo of Run4more analytics data.
+# Public demo of Run4more analytics.
 
 
 ## Purpose
-This repo contains a sample of data produced by the Run4more App.  
+This repo contains a sample of data analytics by the Run4more App.  
 The initial motivation for this repo was to provide to the students of the [UoA Postgraduate Program](https://bis-analytics.econ.uoa.gr/) real life data and problems.  
 Absolutely voluntary work, not part of the University of Athens courses material.   
 
@@ -35,16 +35,16 @@ Finish it all in time before the next semester in October.
 ## Data
 Data are produced in real time by "events" and "actions" while using the App.
 They are stored in a mongoDB database.   
-For educational purposes, a sample of the data is stored in various formats (e.g. csv, bson).
+For educational purposes, a sample of the data is stored in various formats (e.g. csv, feather, bson).
 This data will be processed and presented using various python libraries and command line tools.
 
-The repo examples will gradually expand to cover the various data types the App producses:     
+The repo examples will gradually expand to cover the various data types the App produces:     
 text, numeric, categorical, quantitative, date, time, geolocation, binary, multi-class.  
 Tasks begin with simple python tasks such as working with strings and basic data containers, such as to fix email lists.
 Tasks gradually advance to include working on the data with advanced ML algorithms and visualisation tools.
 
-Step-by-step instructions material will be added to show examples of how to:   
+Step-by-step documentation will be added to show examples of how to:   
 * manage and preprocess data of various types, from different file formats, and databases. 
 * implement ML algorithms,
 * create numerical, categorical, geospatial charts,
-* deploy online and interactive visualization dashboards that can be used in production. .
+* deploy online and interactive visualization dashboards that can be used in production.
