@@ -1,7 +1,9 @@
 import sys
 
+# run from r4m_public directory
 sys.path.append("./src/utils")
-sys.path.append("../src")
+
+# run from tests directory
 sys.path.append("../src/utils")
 
 
