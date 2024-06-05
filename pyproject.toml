@@ -26,6 +26,9 @@ streamlit = "^1.35.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.isort]
+profile = "black"
+
 [tool.mypy]
 disable_error_code = "import-untyped"
 ignore_missing_imports = true
