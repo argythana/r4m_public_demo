@@ -1,8 +1,6 @@
 import os
 from typing import Optional
 
-import pandas as pd
-
 # Get the absolute path of the directory of the current file
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -11,21 +9,21 @@ csv_file_path = os.path.join(dir_path, "..", "data", "obfuscated_data.csv")
 feather_file_path = os.path.join(dir_path, "..", "data", "obfuscated_data.feather")
 
 
-def csv_to_feather(csv_file_path: str, feather_file_path: str) -> None:
-    """
-    Read a csv file and save it as a Feather file.
-
-    :param csv_file_path: The path to the csv file.
-    :param feather_file_path: The path to save the Feather file.
-    :return: None
-    """
-    # Read csv file
-    df = pd.read_csv(csv_file_path)
-
-    # Save DataFrame as Feather file. Identical to .ipc files.
-    df.to_feather(feather_file_path)  # Default version is 2
-
-    return None
+# def csv_to_feather(csv_file_path: str, feather_file_path: str) -> None:
+#     """
+#     Read a csv file and save it as a Feather file.
+#
+#     :param csv_file_path: The path to the csv file.
+#     :param feather_file_path: The path to save the Feather file.
+#     :return: None
+#     """
+#     # Read csv file
+#     df = pd.read_csv(csv_file_path)
+#
+#     # Save DataFrame as Feather file. Identical to .ipc files.
+#     df.to_feather(feather_file_path)  # Default version is 2
+#
+#     return None
 
 
 # get feather file type, Refactored function from:
