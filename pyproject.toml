@@ -21,6 +21,7 @@ pre-commit = "^3.7.1"
 pytest-cov = "^5.0.0"
 streamlit = "^1.35.0"
 polars = "^0.20.31"
+plotly = "^5.22.0"
 
 
 [build-system]
