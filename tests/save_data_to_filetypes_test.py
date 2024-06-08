@@ -18,8 +18,8 @@ from save_data_to_filetypes import is_feather_v1_or_v2
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the paths to the data files
-csv_file_path = os.path.join(dir_path, "../src", "data", "obfuscated_data.csv")
-feather_file_path = os.path.join(dir_path, "../src", "data", "obfuscated_data.feather")
+csv_file_path = os.path.join(dir_path, "../src", "data", "acts_dy_date.csv")
+feather_file_path = os.path.join(dir_path, "../src", "data", "acts_by_date.feather")
 
 
 def test_is_feather_v1_or_v2() -> None:

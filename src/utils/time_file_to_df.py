@@ -12,8 +12,8 @@ import polars as pl
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the paths to the data files
-csv_file_path = os.path.join(dir_path, "..", "data", "obfuscated_data.csv")
-feather_file_path = os.path.join(dir_path, "..", "data", "obfuscated_data.feather")
+csv_file_path = os.path.join(dir_path, "..", "data", "acts_dy_date.csv")
+feather_file_path = os.path.join(dir_path, "..", "data", "acts_by_date.feather")
 
 
 def pandas_read_csv_file() -> pd.DataFrame:

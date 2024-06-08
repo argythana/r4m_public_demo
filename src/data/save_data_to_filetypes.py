@@ -5,8 +5,8 @@ from typing import Optional
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the paths to the data files
-csv_file_path = os.path.join(dir_path, "..", "data", "obfuscated_data.csv")
-feather_file_path = os.path.join(dir_path, "..", "data", "obfuscated_data.feather")
+csv_file_path = os.path.join(dir_path, "..", "data", "acts_dy_date.csv")
+feather_file_path = os.path.join(dir_path, "..", "data", "acts_by_date.feather")
 
 
 # def csv_to_feather(csv_file_path: str, feather_file_path: str) -> None:
@@ -57,4 +57,4 @@ def is_feather_v1_or_v2(feather_file: str) -> Optional[str]:
     return None
 
 
-# is_feather_v1_or_v2("obfuscated_data.feather")
+# is_feather_v1_or_v2("acts_by_date.feather")
