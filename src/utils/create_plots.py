@@ -1,13 +1,23 @@
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-from demo_streamlit_colors import color_template
-from plot_constants_configs import (
+from pandas import DataFrame
+
+from .demo_streamlit_colors import plots_color_template
+from .plot_constants_configs import (
     PLOTS_LABELS,
     common_axes_properties,
     common_layout_properties,
     plot_config,
 )
+
+
+@st.cache_data
+def load_data_to_cache(file_path: str) -> pd.DataFrame:
+    cache_df: DataFrame = pd.read_feather(file_path)
+    # Set date column as index
+    cache_df.set_index("date", inplace=True)
+    return cache_df
 
 
 def create_date_plots(df: pd.DataFrame, *, chart_y: str) -> None:
@@ -34,8 +44,8 @@ def create_date_plots(df: pd.DataFrame, *, chart_y: str) -> None:
             y=df[df_column_name],
             name=chart_y,
             mode="markers+lines",
-            line=dict(color=color_template["lines"]),
-            marker=dict(color=color_template["lines"], size=2),
+            line=dict(color=plots_color_template["lines"]),
+            marker=dict(color=plots_color_template["lines"], size=2),
         )
     )
     fig.update_layout(

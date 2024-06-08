@@ -5,13 +5,12 @@ https://alwane.io/
 """
 
 # Dictionary for demo streamlit app and charts.
-color_template = {
+plots_color_template = {
     "lines": "#0693e3",  # 00b6e6",  # Light Blue
     "titles": "#f57e20",  # Orange
     "background": "#152630",  # Dark Blue
     "ticks": "#0693e3",  # Light Grey #949494
-    "demo": "#162780",
-    "dialectica": "#162780",
+    "demo": "#162780",  # violet blue
 }
 
 # color_template = {

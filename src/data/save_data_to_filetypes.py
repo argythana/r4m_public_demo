@@ -1,6 +1,8 @@
 import os
 from typing import Optional
 
+import pandas as pd
+
 # Get the absolute path of the directory of the current file
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -9,21 +11,21 @@ csv_file_path = os.path.join(dir_path, "..", "data", "acts_dy_date.csv")
 feather_file_path = os.path.join(dir_path, "..", "data", "acts_by_date.feather")
 
 
-# def csv_to_feather(csv_file_path: str, feather_file_path: str) -> None:
-#     """
-#     Read a csv file and save it as a Feather file.
-#
-#     :param csv_file_path: The path to the csv file.
-#     :param feather_file_path: The path to save the Feather file.
-#     :return: None
-#     """
-#     # Read csv file
-#     df = pd.read_csv(csv_file_path)
-#
-#     # Save DataFrame as Feather file. Identical to .ipc files.
-#     df.to_feather(feather_file_path)  # Default version is 2
-#
-#     return None
+def csv_to_feather(csv_file_path: str, feather_file_path: str) -> None:
+    """
+    Read a csv file and save it as a Feather file.
+
+    :param csv_file_path: The path to the csv file.
+    :param feather_file_path: The path to save the Feather file.
+    :return: None
+    """
+    # Read csv file
+    df = pd.read_csv(csv_file_path)
+
+    # Save DataFrame as Feather file. Identical to .ipc files.
+    df.to_feather(feather_file_path)  # Default version is 2
+
+    return None
 
 
 # get feather file type, Refactored function from:
@@ -57,4 +59,10 @@ def is_feather_v1_or_v2(feather_file: str) -> Optional[str]:
     return None
 
 
+if __name__ == "__main__":
+    # Convert the csv file to a Feather file
+    csv_to_feather(csv_file_path, feather_file_path)
+
+    # Check if the Feather file is a v1 or v2 file
+    print(is_feather_v1_or_v2(feather_file_path))
 # is_feather_v1_or_v2("acts_by_date.feather")
