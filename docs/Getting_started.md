@@ -29,6 +29,31 @@ Optional: Get a domain name and make the app public.
 C) Create a streamlit app that displays data that are updated in real-time and can be updated by the end user.  
 1) Create a form that allows the user to input data.
 2) Create a button that allows the user to update the data.
-In the backend, the data should be aggregated and groupped in a Postgres database.
+
+3) In the backend, the data should be aggregated and grouped in a Postgres database.
 
 In the end, the project should be like [r4m.live](https://r4m.live) but with a different dataset and a different use case.
+
+Discaimer: This project is for educational purposes only. The code and data design is meant to server intermediate to advanced users.  
+In actual deployment, the code should be refactored taking into account security and performance considerations.   
+
+Things to consider include but are not limited to:
+* Security of the server and the data,
+* Server response time,
+* Server RAM, CPU and storage space usage, cost.
+* Should the data for a plot be taken directly via the respective mongoDB collection, a Postgres table, or a stored file?
+* Should the data be aggregated in the backend or in the frontend?
+* Should the data be aggregated in real-time while requesting to show a plot or should the data be aggregated at a fixed interval?
+* Should the data be updated in real-time or should it be updated at a fixed interval and if so, how frequently?
+* Should the data be updated by the user or should it be updated automatically?
+
+Example:   
+a leaderboard of the top 30 users by distance covered in the last 100 days. Options:  
+a) Should this data be "aggregated" and stored ina a file or a DB collection?,
+b) Should the Streamlit App query the activities mongoDB collection every time the page is refreshed?
+c) Should the data be updated in real-time, after every new activity is added to the database?
+d) Should the data be updated at a fixed interval?
+
+To provide a reply to the above questions, one should actually:  
+* measure and evaluate the performance of the system,
+* take into account the tradeoff between user experience and financial cost.  

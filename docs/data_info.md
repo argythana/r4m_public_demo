@@ -2,6 +2,9 @@
 Subset or actual Run4more database. Use for demonstration and educational purposes only.  
 Based on real Runb4more data and curated to add random noise and volume.
 
+## Design Purpose:
+Provide different data versions and formats for educational purposes.
+
 ## Versions:
 1) Without the trend. Detrended data.
 2) With the trend. 
