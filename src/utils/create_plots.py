@@ -1,3 +1,12 @@
+"""
+This module contains functions to create plots using Plotly.
+Data for the plots can be from:
+DataFrames: pandas or TODO: polars
+TODO: Feather or CSV file.
+TODO: MongoDB.
+TODO: SQL database.
+"""
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st

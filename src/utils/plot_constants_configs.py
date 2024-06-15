@@ -1,3 +1,10 @@
+"""
+This module contains:
+the configuration for the plotly plots,
+the labels for the plots,
+the common properties for the axes and layout of the plots,
+"""
+
 from typing import Any, Dict
 
 from .demo_streamlit_colors import plots_color_template

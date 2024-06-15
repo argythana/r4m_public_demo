@@ -1,6 +1,6 @@
 """
-PLot the data from a dataframe.
-Run from the src directory.
+PLot the data from a dataframe. Run from the src directory.
+Use for development and testing of single plots.
 """
 
 import os
@@ -13,7 +13,7 @@ from utils.create_plots import create_date_plots, load_data_to_cache
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the paths to the data files
-feather_file_path = os.path.join(dir_path, ".", "data", "acts_by_date.feather")
+feather_file_path = os.path.join(dir_path, ".", "data", "acts_by_date_trend.feather")
 
 
 if __name__ == "__main__":
@@ -24,4 +24,4 @@ if __name__ == "__main__":
     # create_date_plots(df, chart_y="acts")
     # create_date_plots(df, chart_y="distance")
     create_date_plots(df, chart_y="users")
-    create_date_plots(df, chart_y="duration")
+    # create_date_plots(df, chart_y="duration")
