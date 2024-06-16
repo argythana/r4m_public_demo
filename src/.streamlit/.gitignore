@@ -1,0 +1,8 @@
+# Git ignore everything in this directory
+*
+# Except these files
+!.gitignore
+!config.toml
+
+# In production, this file should not be pushed to Github.
+!secrets.toml
