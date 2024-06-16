@@ -7,13 +7,15 @@ TODO: MongoDB.
 TODO: SQL database.
 """
 
+from __future__ import annotations
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from pandas import DataFrame
 
 from .demo_streamlit_colors import plots_color_template
-from .plot_constants_configs import (
+from .sinlge_plot_constants_configs import (
     PLOTS_LABELS,
     common_axes_properties,
     common_layout_properties,
