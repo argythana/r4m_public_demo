@@ -10,10 +10,9 @@
 
 # Public demo of Run4more analytics.
 
-
 ## Purpose
 This repo contains a sample of data analytics by the Run4more App.  
-The initial motivation for this repo was to provide to the students of the [UoA Postgraduate Program](https://bis-analytics.econ.uoa.gr/) real life data and problems.  
+The initial motivation for this repo was to provide to the students of the [UoA Postgraduate Program](https://bis-analytics.econ.uoa.gr/) real-world data and problems.  
 Absolutely voluntary work, not part of the University of Athens courses material.   
 
 For beginners, the material of the Postgradute Program course is an absolutely necessary pre-requisite.  
@@ -49,3 +48,5 @@ Step-by-step documentation will be added to show examples of how to:
 * implement ML algorithms,
 * create numerical, categorical, geospatial charts,
 * deploy online and interactive visualization dashboards that can be used in production.
+
+In the end, the project should be like [r4m.live](https://r4m.live) but with a different dataset and a different use case.
