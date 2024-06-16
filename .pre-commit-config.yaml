@@ -56,7 +56,10 @@ repos:
     hooks:
       - id: "poetry-check"
       - id: "poetry-lock"
-        args: ["--check"]
+        args: ["--check", "--no-update"]
       - id: "poetry-export"
         name: 'poetry export main'
         args: [ "--without-hashes", "--only", "main", "-f", "requirements.txt", "-o", "requirements/requirements.txt" ]
+      - id: "poetry-export"
+        name: 'poetry export dev'
+        args: [ "--without-hashes", "--with", "dev", "--with", "docs", "--with", "jupyter", "-f", "requirements.txt", "-o", "requirements/requirements-dev.txt" ]

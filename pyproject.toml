@@ -2,7 +2,7 @@
 name = "r4m-public"
 version = "0.1.0"
 description = ""
-authors = ["ΘΑΝΑΣΗΣ ΑΡΓΥΡΙΟΥ <argythana@gmail.com>"]
+authors = ["Thanasis Argyriou <argythana@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
