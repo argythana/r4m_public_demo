@@ -50,3 +50,10 @@ Step-by-step documentation will be added to show examples of how to:
 * deploy online and interactive visualization dashboards that can be used in production.
 
 In the end, the project should be like [r4m.live](https://r4m.live) but with a different dataset and a different use case.
+
+## Docker image with minimum example of the project
+Use the Dockerfile to create a docker image with the minimum example of the project.
+```bash
+docker build -t r4m_demo .
+docker run r4m_demo
+```
