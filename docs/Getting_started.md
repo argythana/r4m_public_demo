@@ -1,6 +1,8 @@
 # WIP
 
 Beginners' guide to getting started with the project.
+Understand the project structure and the tasks to be completed.
+[Cool guide on a principle of refactoring](https://fs.blog/chestertons-fence/)
 
 * Clone the repository.
 * Install mongoDB and Postgres.

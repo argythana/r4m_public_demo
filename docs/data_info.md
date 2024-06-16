@@ -10,14 +10,14 @@ Provide different data versions and formats for educational purposes.
 2) With the trend. 
 
 ## Topics:
-1) Aggregated Activities of Run4more users, by day of the year (Date).
+1) Aggregated Activities of Run4more users, grouped by day of the year (Date).
 Features:
 * Date
 * Distance
 * Duration
 * Activity type
 
-From the above data, we can derive various features:
+From the above data, we derive various features:
 * Speed
 * Pace
 * Calories
@@ -32,9 +32,10 @@ All the above data plus:
 
 TODO: Add:
 3) Granular data of Run4more users and activities.
-They "key" in this dataset if the activity_id.
-This data si at the level of the second.
-Allows for:  
+They "key" in this dataset if the activity `_id`.
+For an example of a subset of the data in the mongo collection of activities see:
+`r4mProd.activities.csv`  
+Data at the level of a second, allow for:  
 * more detailed analysis of "popular" routes and hours of the day.
 * more detailed analysis of the user's behavior.
 
