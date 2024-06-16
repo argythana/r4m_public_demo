@@ -9,7 +9,7 @@ import random
 from typing import Optional, Union
 
 import pandas as pd
-import plotly.graph_objects as go  # type: ignore
+import plotly.graph_objects as go
 import streamlit as st
 from pandas import DataFrame
 
