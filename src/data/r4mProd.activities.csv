@@ -1,0 +1,4 @@
+_id,distance,pace.hours,pace.minutes,pace.seconds,points,time.hours,time.minutes,time.seconds,user_id,createdAt,type
+62873d1f181a6d5adf0f62b2,0.17,0,14,39,17,0,2,33,6206e062fb2d16fd06802520,2022-05-20T07:02:55.295Z,walk-run
+62873d8e181a6d5adf0f62c2,4.1,0,13,19,410,0,54,41,6251c082520daa3cd653d214,2022-05-20T07:04:46.043Z,bike
+62874060181a6d5adf0f62f0,0.15,0,17,32,15,0,2,40,6206e062fb2d16fd06802520,2022-05-20T07:16:48.452Z,walk-run
