@@ -2,12 +2,12 @@
 .envrc
 .idea/
 .venv/
-# local pytest cov report
+
+# Local pytest cov report
 .coverage
 
-# access configs
+# Access configs
 src/config/credentials.json
 
-tests/__pycache__/
-src/utils/__pycache__/
-src/data/__pycache__/
+# Ignore all pycache in any N of dirs
+**/__pycache__/
