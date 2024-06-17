@@ -51,7 +51,7 @@ Step-by-step documentation will be added to show examples of how to:
 * create numerical, categorical, geospatial charts,
 * deploy online and interactive visualization dashboards that can be used in production.
 
-In the end, the project should be like [r4m.live](https://r4m.live) but with a different dataset and a different use case.
+In the end, the project should be like [the dashboard demo of Run4more.](http://r4m.live:8555) but with a different dataset and a different use case.
 
 ## Minimum version in Docker image
 Use the Dockerfile to create a docker image with basic parts of the project.   
