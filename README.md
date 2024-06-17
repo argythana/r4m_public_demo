@@ -53,9 +53,26 @@ Step-by-step documentation will be added to show examples of how to:
 
 In the end, the project should be like [r4m.live](https://r4m.live) but with a different dataset and a different use case.
 
-## Docker image with minimum example of the project
-Use the Dockerfile to create a docker image with the minimum example of the project.
+## Minimum version in Docker image
+Use the Dockerfile to create a docker image with basic parts of the project.   
+At its current state, the Dockerfile run a simple streamlit app usind static data.  
+First, clone the repo and assuming you have Docker installed run:
+
 ```bash
 docker build -t r4m_demo .
-docker run r4m_demo
+docker run -it r4m_demo
+```
+Alternatively, you may install git and clone the repo inside the Dockerfile.   
+Before the `ADD` commands in the Dockerfile, add the following lines:  
+
+```bash
+RUN apt-get update && apt-get install -y git
+RUN https://github.com/argythana/r4m_public_demo.git
+
+```
+Then, you may use all the parts of the project in the Docker image.  
+Instead of copying only some files, you may replace all the ADD comands with:
+
+```bash
+ADD . /src
 ```
