@@ -39,5 +39,7 @@ if __name__ == "__main__":
 
     else:
         st.info(
-            "Please login by clicking on the Login button. Username: `r4m_worth`, Pwd: `$millions`."
+            "Please login by clicking on the Login button. \n\n"
+            "Username: `r4m_value` \n\n"
+            "Password: `$millions`"
         )
