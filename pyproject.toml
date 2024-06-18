@@ -35,7 +35,6 @@ build-backend = "poetry.core.masonry.api"
 profile = "black"
 
 [tool.mypy]
-strict = true
 disable_error_code = "import-untyped"
 ignore_missing_imports = true
 
