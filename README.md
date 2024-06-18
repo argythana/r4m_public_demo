@@ -10,96 +10,98 @@
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue?logo=docker&logoColor=white)](Dockerfile)
 
 
-# Public demo of Run4more analytics.
+# Public demo of Run4more analytics
 
 ## Purpose
-This repo contains a demo preview of data analytics for a sample of data of the Run4more App.  
-The initial motivation for this repo was to provide to the students of the [UoA Postgraduate Program](https://bis-analytics.econ.uoa.gr/) real-world data and problems.  
+Demo preview of analytics for a sample of data of the Run4more App.  
+Initial motivation was to provide to students of the [University of Athens Postgraduate Program (UoA - BIS)](https://bis-analytics.econ.uoa.gr/) real-world data and problems.  
 Absolutely voluntary work, not part of the University of Athens courses material.   
 
-For beginners, the material of the Postgradute Program course is an absolutely necessary pre-requisite.  
-Please visit the public repo of the University of Athens BIS postgrad program [python course.](https://github.com/argythana/uoa_py_course)  
-Similarly, basic knowledge of git, mongoDB, Postgres, and python dev tools such as pipx, poetry, ruff, pyright, pytest, black is necessary.  
-Please visit the public repo of the University of Athens BIS postgrad program [crash-course on dev tools.](https://github.com/argythana/dev_boilerplate_course)    
+The material of the UoA - BIS [python course](https://github.com/argythana/uoa_py_course) is a necessary pre-requisite.  
+Knowledge of git, mongoDB, python tools such as pipx, poetry, ruff, mypy, pytest, black is needed too. Please visit the [UoA - BIS crash-course on dev tools.](https://github.com/argythana/dev_boilerplate_course)  
 
-
-Thanks to students' feedback from past years, the repo is being refactored to a new public version to meet several purposes:     
-1. Be an intermediate educational material for learning python and train on real-world data and tasks.  
-2. Demonstrate the use of necessary dev tools simulating real development environment standards.
-3. Demonstrate to Run4more users how their data serve Run4more's mission to increase physical activity.   
+Thanks to feedback from past years, the repo is being refactored to a public version to:     
+1. Provide intermediate educational python material on real-world data and tasks.  
+2. Provide intermediate educational material on dev tools in real production.
+3. Demonstrate how Run4more uses data to increase user's physical activity.   
 4. Demonstrate to Run4more partners what data is collected and how it could be analyzed.  
-5. Create a first working example for the "StartUps Academy" project (new repo to be added).   
-This is an idea (under consideration) in which StartUps may offer a sample of their data to help Universities provide efficient open education and research.
-6. Be a starting point for the formation of "UoA BIS Postgraduates Data Science Community" (new repo to be added).  
+5. Be a first working example for the "StartUps Open Academy" (new repo to be added). This is an idea (under consideration) in which StartUps: offer a sample of their data, help Universities provide efficient education and research, and get to train postgraduate students on their data and workflows.
+6. Be a starting point for a "UoA BIS Postgraduates Data Science Community" (new repo to be added). This would create a place in which postgraduates:
+   * stay motivated and on course in landing a job in DS, ML or software development.  
+   * share related work, 
+   * undertake peer learning with real-work examples, 
+   * advance their programming skills from diverse topics and, 
+   * collaborate on projects.
 
-This would be a place in which UoA BIS postgraduates:
-* get extra material,  
-* stay motivated and on course in landing a job in DS, ML or software development.  
-* share their related work, 
-* undertake peer learning with real examples from their work, 
-* advance their porgramming skills from diverse topiscs and, 
-* collaborate on projects.
+Roadmap: A personal deadline, not a promise. A goal to keep me on track, as the Greek summer approaches.  
+Finish in time, before the next semester starts in October 2024.
 
-Roadmap: A personal deadline made public, not a promise. Just a goal to keep me on track, as the Greek summer approaches.  
-Finish it all in time before the next semester in October.
+**Open to suggestions, ideas, criticism, and collaboration.**
 
 ## Data
-Data have been produced by "events" and "actions" while using the Run4more App, stored in a mongoDB database.  
+Data have been produced by "events" and "actions" by the Run4more App, stored in a mongoDB database.  
 For educational purposes, a sample of the data is stored in various formats (e.g. csv, feather, bson).  
-This data will be processed and presented using various python libraries and command line tools.
+This data will be proccessed and presented using python and other tools.
 
 The repo examples will gradually expand to cover the various data types the App produces:     
 text, numeric, categorical, quantitative, date, time, geolocation, binary, multi-class.  
 
-## Tasks
-Tasks are actual functionalities that where built when needed for the Run4more App.  
-Tasks begin with simple python tasks such as working with strings, data containers, plots.
+## Tasks examples
+Tasks are based on actual functionalities that were built when needed for Run4more.  
+Tasks begin with simple python tasks such as working with dataframes, lists, plots.  
 Examples (to be added):   
-* Create aggregate analytics for the whole of the App data.  
-The result of this task should be to create variations of [a dashboard of Run4more,](http://r4m.live:8555), using different data and creating more plots.
+* Manage and preprocess data of various types, from different file formats and databases.
+* Create analytics for all kinds of Run4more data, and their respective plots (numerical, categorical, geospatial charts) and deploy them online, on interactive dashboards.
+The result of these tasks is to create variations of a [demo dashboard of Run4more,](http://r4m.live:8555) for different data and plots.
+
 * Create custom analytics for a Run4more partner that launches a corporate *Wellness* or *Charity* Challenge.
 * Predict a user's home and work address.
 * Get the closest Metro station to a user's home and work address.
-* Get the closest Supermarket (from a given list) to a user's home and work address.
-* Create lists of users to send email when an event happens, e.g. users who stop at any location of a list of Supermarket locations get a unique coupon.
-* Create an email using an html template and send the coupon number and suggestion for the closest supermarket  using a mail server.
-* Calculate the distance between a user's home and work address and calculate a suggested route and duration for going to work using a bicycle.
+* Get the closest Supermarkets (from a given list) to a user's home and work address.
+* Get Supermarkets (from a given list) on the route from a user's home to their work.
+* Create users lists (store in DB collections) to send email when an `event` happens, e.g. stop at any location in a list, and win a unique coupon.
+* Create email using an html template and send a coupon number and suggestion for the closest supermarket using a mail server.
+* Calculate distance between a user's home and work address.
+* Suggest the shortest route and duration for going to work using a bicycle.
 
-Tasks gradually advance to include working on the data with advanced ML algorithms and visualisation tools. E.g.  
-* Predict the user's mode of transport.
-* Create clusters of users based on their activity.
-* Create clusters of users based on their preferences.
-* Classify the user's preferences based on the product he "views" or "buys" in the App.
-* Using classes of "offers" or "products" types, predict the increase in a user's engagement.
+Tasks gradually advance to include implementing ML algorithms:  
+* Predict a user's mode of transport.
+* Create clusters of users based on their activity and/or preferences.
+* Classify users' preferences based on the product they "view" or "buy" in the App.
+* Predict the location a user will be at, during a given time interval.
 
-Step-by-step documentation will be added to show examples of how to:   
-* manage and preprocess data of various types, from different file formats, and databases. 
-* implement ML algorithms,
-* create numerical, categorical, geospatial charts,
-* deploy online and interactive visualization dashboards that can be used in production.
-
-
-
-## Minimum version in Docker image
-Use the Dockerfile to create a docker image with basic parts of the project.   
-At its current state, the Dockerfile run a simple streamlit app usind static data.  
+## Minimum version of analytics in Docker image
+Use the Dockerfile to create a docker image with basic version of the project.   
+At its current state, the Dockerfile deploys a simple streamlit app using static data.  
 First, clone the repo and assuming you have Docker installed run:
 
 ```bash
 docker build -t r4m_demo .
 docker run -it r4m_demo
 ```
-Alternatively, you may install git and clone the repo inside the Dockerfile.   
+Alternatively, you may clone the repo inside the Dockerfile.   
 Before the `ADD` commands in the Dockerfile, add the following lines:  
 
 ```bash
+# Install git and clone repo
 RUN apt-get update && apt-get install -y git
 RUN https://github.com/argythana/r4m_public_demo.git
 
 ```
 Then, you may use all the parts of the project in the Docker image.  
-Instead of copying only some files, you may replace all the ADD comands with:
+Instead of copying only selected files, you may replace all the `ADD` commands with:
 
 ```bash
+# Copy all files
 ADD . /src
 ```
+
+## Long-term vision
+a) Create a docker version of the project that includes:  
+* a mongoDB database with a sample of the data,
+* a Postgres database with a sample of the data,
+* services to update Databases, deploy and update analytics dashboards, and ML models.
+
+b) Add instructions to encourage use of [Github students development pack](https://github.com/edu/students):
+* set up linux server, use a bought domain name, and a free SSL certificate.
+* host the docker image, the databases, and the services on the server.
