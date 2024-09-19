@@ -34,7 +34,7 @@ if __name__ == "__main__":
             unsafe_allow_html=True,
         )
 
-        # Dashboard from feather file
+        # Static dashboard from feather file
         create_all_charts_from_feather_file("./data/acts_by_date_trend.feather")
 
     else:

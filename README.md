@@ -13,7 +13,9 @@
 # Public demo of Run4more analytics
 
 ## Purpose
-Demo preview of analytics for a sample of data of the Run4more App.  
+Demo preview of analytics for a sample of synthetic data based on the Run4more App.    
+Please visit the [Run4more demo](http://r4m.live:8555).
+
 Initial motivation was to provide to students of the [University of Athens Postgraduate Program (UoA - BIS)](https://bis-analytics.econ.uoa.gr/) real-world data and problems.  
 Absolutely voluntary work, not part of the University of Athens courses material.   
 
@@ -52,7 +54,7 @@ Tasks begin with simple python tasks such as working with dataframes, lists, plo
 Examples (to be added):   
 * Manage and preprocess data of various types, from different file formats and databases.
 * Create analytics for all kinds of Run4more data, and their respective plots (numerical, categorical, geospatial charts) and deploy them online, on interactive dashboards.
-The result of these tasks is to create variations of a [demo dashboard of Run4more,](http://r4m.live:8555) for different data and plots.
+The result is to create simplified variations of a [demo dashboard of Run4more,](http://r4m.live:8555) for different data and plots.
 
 * Create custom analytics for a Run4more partner that launches a corporate *Wellness* or *Charity* Challenge.
 * Predict a user's home and work address.
