@@ -11,7 +11,7 @@ WORKDIR /src
 ADD README.md /src/README.md
 
 # Add python files for basic streanlit app.
-ADD src/public_dashboard.py /src/public_dashboard.py
+ADD src/public_static_dashboard.py /src/public_static_dashboard.py
 ADD src/streamlit_auth.py /src/streamlit_auth.py
 ADD src/utils/__init__.py /src/utils/__init__.py
 ADD src/utils/all_plots_from_df.py /src/utils/all_plots_from_df.py
@@ -35,5 +35,5 @@ RUN pip install --no-cache-dir -r requirements/requirements.txt
 # Expose port 8555
 EXPOSE 8555
 
-# Run public_dashboard.py when container launches
-ENTRYPOINT ["streamlit", "run", "public_dashboard.py", "--server.port=8555"]
+# Run public_static_dashboard.py when container launches
+ENTRYPOINT ["streamlit", "run", "public_static_dashboard.py", "--server.port=8555"]
