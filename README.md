@@ -17,7 +17,7 @@ Demo preview of daily activities analytics for a sample of synthetic data based 
 
 Please visit the public [Run4more demo](http://r4m.live:8555).  
 
-For a preview of a corporate or an impact challenge dashboard please visit [Run4more corporate demo](https://r4m.live:8502).  
+For a preview of a corporate or an impact challenge dashboard please visit [Run4more corporate demo](https://r4m.live:8510).  
 
 
 Initial motivation was to provide to students of the [University of Athens Postgraduate Program (UoA - BIS)](https://bis-analytics.econ.uoa.gr/) real-world data and problems.  
