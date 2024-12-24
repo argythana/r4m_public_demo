@@ -13,18 +13,20 @@
 # Public demo of Run4more analytics
 
 ## Purpose
-Demo preview of daily activities analytics for a sample of synthetic data based on the Run4more App.      
+Preview Demo of daily activities analytics from Run4more App users.  
+Based on Synthetic data.
 
 Please visit the public [Run4more demo](http://r4m.live:8555).  
 
-For a preview of a corporate or an impact challenge dashboard please visit [Run4more corporate demo](https://r4m.live:8510).  
+For a preview of a "corporate" or an "impact challenge" dashboard, please visit [Run4more corporate demo](https://r4m.live:8510).  
 
 
 Initial motivation was to provide to students of the [University of Athens Postgraduate Program (UoA - BIS)](https://bis-analytics.econ.uoa.gr/) real-world data and problems.  
 Absolutely voluntary work, not part of the University of Athens courses material.   
 
 The material of the UoA - BIS [python course](https://github.com/argythana/uoa_py_course) is a necessary pre-requisite.  
-Knowledge of git, mongoDB, python tools such as pipx, poetry, ruff, mypy, pytest, black is needed too. Please visit the [UoA - BIS crash-course on dev tools.](https://github.com/argythana/dev_boilerplate_course)  
+Knowledge of git, mongoDB, python tools such as pipx, poetry, ruff, mypy, pytest, black is needed too.   
+Please visit the [UoA - BIS crash-course on dev tools.](https://github.com/argythana/dev_boilerplate_course)  
 
 Thanks to feedback from past years, the repo is being refactored to a public version to:     
 1. Provide intermediate educational python material on real-world data and tasks.  
@@ -40,12 +42,15 @@ Thanks to feedback from past years, the repo is being refactored to a public ver
    * collaborate on projects.
 
 Roadmap: A personal deadline, not a promise. A goal to keep me on track, as the Greek summer approaches.  
-Finish in time, before the next semester starts in October 2024.
+V.1 Create a live interactive dashboard from csv files, before the next semester starts, October 2024. DONE.  
+V.2 Create a live interactive dashboard from a mongoDB database, before the next semester starts, February 2025.
+V.3 Create examples of Change Data Capture, data streaming, orchestration of processes for data ransformation with Airflow.
+
 
 **Open to suggestions, ideas, criticism, and collaboration.**
 
 ## Data
-Data have been produced by "events" and "actions" by the Run4more App, stored in a mongoDB database.  
+Data have been produced by "events" and "actions" by the Run4more App users, stored in a mongoDB database.  
 For educational purposes, a sample of the data is stored in various formats (e.g. csv, feather, bson).  
 This data will be proccessed and presented using python and other tools.
 
@@ -70,8 +75,8 @@ The result is to create simplified variations of a [demo dashboard of Run4more,]
 * Calculate distance between a user's home and work address.
 * Suggest the shortest route and duration for going to work using a bicycle.
 
-Tasks gradually advance to include implementing ML algorithms:  
-* Predict a user's mode of transport.
+Tasks gradually advance to include implementing ML algorithms:  (Perhaps in dedicated r4m_ml repo.)
+* Predict a user's mode of transport, based on Home - Work distance and public transportation usability.
 * Create clusters of users based on their activity and/or preferences.
 * Classify users' preferences based on the product they "view" or "buy" in the App.
 * Predict the location a user will be at, during a given time interval.
@@ -83,10 +88,11 @@ First, clone the repo and assuming you have Docker installed run:
 
 ```bash
 docker build -t r4m_demo .
-docker run -it r4m_demo
+docker run -p 8555:8555 r4m_demo
+ r4m_demo
 ```
 Alternatively, you may clone the repo inside the Dockerfile.   
-Before the `ADD` commands in the Dockerfile, add the following lines:  
+In this case, before the `ADD` commands in the Dockerfile, add the following lines:  
 
 ```bash
 # Install git and clone repo
@@ -106,7 +112,7 @@ ADD . /src
 a) Create a docker version of the project that includes:  
 * a mongoDB database with a sample of the data,
 * a Postgres database with a sample of the data,
-* services to update Databases, deploy and update analytics dashboards, and ML models.
+* Airflow and systemd services to update Databases, deploy and update analytics dashboards, and ML models.
 
 b) Add instructions to encourage use of [Github students development pack](https://github.com/edu/students):
 * set up linux server, use a bought domain name, and a free SSL certificate.
