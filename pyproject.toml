@@ -16,6 +16,7 @@ polars = "^0.20.31"
 plotly = "^5.22.0"
 matplotlib = "^3.9.0"
 pandas-stubs = "^2.2.2.240603"
+scikit-learn = "^1.5.2"
 
 [tool.poetry.dev-dependencies]
 ruff = "^0.4.5"
